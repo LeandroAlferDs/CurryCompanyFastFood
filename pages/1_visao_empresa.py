@@ -204,7 +204,7 @@ with tab1:
 
     #desenhar o grafico de linhas (plotly)
 
-    fig = px.bar(df1,x='Order_Date',y='ID')#coloquei a variavel df1 no lugar de df_aux 
+    fig = px.bar(df_aux,x='Order_Date',y='ID')#coloquei a variavel df1 no lugar de df_aux ... agora voltei ao normal
     
     col1, col2 = st.columns(2)
 with col1:
