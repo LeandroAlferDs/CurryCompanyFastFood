@@ -176,7 +176,7 @@ with st.container():
             col6.metric('Tempo Médio de Entrega sem Festival', df_aux)
             
              
-                    st.markdown("""___""")
+            st.markdown("""___""")
 with st.container():
         st.title("Tempo Médio de entrega por cidade")
         cols = ['Delivery_location_latitude','Delivery_location_longitude','Restaurant_latitude','Restaurant_longitude']
