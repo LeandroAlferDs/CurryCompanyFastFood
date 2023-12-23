@@ -18,7 +18,7 @@ st.set_page_config(page_title='Visão Empresa',page_icon='', layout='wide')
 
 
 #import dataset
-df= pd.read_csv('programacao/train.csv')
+df= pd.read_csv('train.csv')
 
 df1 = df.copy()
 
