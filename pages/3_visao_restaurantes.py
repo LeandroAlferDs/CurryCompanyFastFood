@@ -174,14 +174,6 @@ with st.container():
             avg_distance = np.round(df1['Distance'].mean(),2)
             col6.metric('Distancia media das entregas', avg_distance) 
 
-            cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
-            df1['Distance']=df1.loc[:,cols].apply( lambda x: #lambda faz percorrer a matriz linha por linha.
-                                      # e criacao de coluna Distance na atribuição da linha de cima.
-                    haversine(      #haversine faz calcular lat/long
-            (x['Restaurant_latitude'], x['Restaurant_longitude']),
-            (x['Delivery_location_latitude'], x['Delivery_location_longitude'])), axis=1)
-            avg_distance = np.round(df1['Distance'].mean(),2)
-            col6.metric('Distancia media das entregas', avg_distance) 
             
         st.markdown("""___""")
 with st.container():
