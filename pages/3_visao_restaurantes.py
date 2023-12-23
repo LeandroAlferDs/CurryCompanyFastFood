@@ -172,7 +172,7 @@ with st.container():
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','avg_time'],2 )
             col5.metric('Tempo Médio de Entrega c/ Festival', df_aux)
         with col6: 
-        cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
+            cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
             df1['Distance']=df1.loc[:,cols].apply( lambda x: #lambda faz percorrer a matriz linha por linha.
                                       # e criacao de coluna Distance na atribuição da linha de cima.
                     haversine(      #haversine faz calcular lat/long
