@@ -123,6 +123,15 @@ with tab1:
             delivery_unique = df1.loc[:,'Delivery_person_ID'].nunique()
             col1.metric("Entregadores Únicos", delivery_unique)
         with col2:
+            df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
+                         .groupby('Festival')
+                         .agg({'Time_taken(min)' : ['mean','std']}))
+            
+            df_aux.columns = ['avg_time','std_time']
+            df_aux = df_aux.reset_index()
+            df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','std_time'],2 )
+            col6.metric('Desvio Padrão de Entrega sem Festival', df_aux)
+            
             cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
             df1['Distance']=df1.loc[:,cols].apply( lambda x: #lambda faz percorrer a matriz linha por linha.
                                       # e criacao de coluna Distance na atribuição da linha de cima.
@@ -163,14 +172,14 @@ with st.container():
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','avg_time'],2 )
             col5.metric('Tempo Médio de Entrega c/ Festival', df_aux)
         with col6: 
-            df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
-                         .groupby('Festival')
-                         .agg({'Time_taken(min)' : ['mean','std']}))
-            
-            df_aux.columns = ['avg_time','std_time']
-            df_aux = df_aux.reset_index()
-            df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','std_time'],2 )
-            col6.metric('Desvio Padrão de Entrega c/ Festival', df_aux)
+        cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
+            df1['Distance']=df1.loc[:,cols].apply( lambda x: #lambda faz percorrer a matriz linha por linha.
+                                      # e criacao de coluna Distance na atribuição da linha de cima.
+                    haversine(      #haversine faz calcular lat/long
+            (x['Restaurant_latitude'], x['Restaurant_longitude']),
+            (x['Delivery_location_latitude'], x['Delivery_location_longitude'])), axis=1)
+            avg_distance = np.round(df1['Distance'].mean(),2)
+            col2.metric('Distancia media das entregas', avg_distance) 
             
         st.markdown("""___""")
 with st.container():
