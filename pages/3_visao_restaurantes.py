@@ -155,7 +155,7 @@ with st.container():
             (x['Delivery_location_latitude'], x['Delivery_location_longitude'])), axis=1)
             avg_distance = np.round(df1['Distance'].mean(),2)
             col4.metric('Distancia media das entregas', avg_distance)
-            st.markdown("""___""")
+            #st.markdown("""___""")
     
         with col5: 
             df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
@@ -165,7 +165,7 @@ with st.container():
             df_aux = df_aux.reset_index()
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='Yes','std_time'],2 )
             col5.metric('Desvio Padrão de Entrega sem Festival', df_aux)
-            st.markdown("""___""")
+            #st.markdown("""___""")
                         
         with col6:
             df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
@@ -176,7 +176,7 @@ with st.container():
             df_aux = df_aux.reset_index()
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','avg_time'],2 )
             col6.metric('Tempo Médio de Entrega sem Festival', df_aux)
-            st.markdown("""___""")
+        st.markdown("""___""")
            
 with st.container():
         st.title("Tempo Médio de entrega por cidade")
