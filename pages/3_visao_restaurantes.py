@@ -130,7 +130,7 @@ with tab1:
             df_aux.columns = ['avg_time','std_time']
             df_aux = df_aux.reset_index()
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='No','std_time'],2 )
-            col2.metric('Desvio Padrão de Entrega sem Festival', df_aux)
+            col2.metric('Desvio Padrão de Entrega com Festival', df_aux)
             
             
             
@@ -154,7 +154,7 @@ with st.container():
             df_aux.columns = ['avg_time','std_time']
             df_aux = df_aux.reset_index()
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='Yes','std_time'],2 )
-            col4.metric('Desvio Padrão de Entrega c/ Festival', df_aux)
+            col4.metric('Desvio Padrão de Entrega sem Festival', df_aux)
         with col5: 
             df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
                          .groupby('Festival')
