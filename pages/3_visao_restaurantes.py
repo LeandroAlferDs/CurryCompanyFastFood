@@ -142,20 +142,11 @@ with tab1:
             df_aux.columns = ['avg_time','std_time']
             df_aux = df_aux.reset_index()
             df_aux = np.round(df_aux.loc[df_aux['Festival']=='Yes','avg_time'],2 )
-            col3.metric('Tempo Médio de Entrega c/ Festival', df_aux)
+            col3.metric('Tempo Médio de Entrega com Festival', df_aux)
 
 with st.container():
         col4,col5,col6= st.columns(3,gap='large')
         with col4: 
-            df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
-                         .groupby('Festival')
-                         .agg({'Time_taken(min)' : ['mean','std']}))
-            
-            df_aux.columns = ['avg_time','std_time']
-            df_aux = df_aux.reset_index()
-            df_aux = np.round(df_aux.loc[df_aux['Festival']=='Yes','std_time'],2 )
-            col4.metric('Desvio Padrão de Entrega sem Festival', df_aux)
-        with col5: 
             cols = ['Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude']
             df1['Distance']=df1.loc[:,cols].apply( lambda x: #lambda faz percorrer a matriz linha por linha.
                                       # e criacao de coluna Distance na atribuição da linha de cima.
@@ -163,8 +154,18 @@ with st.container():
             (x['Restaurant_latitude'], x['Restaurant_longitude']),
             (x['Delivery_location_latitude'], x['Delivery_location_longitude'])), axis=1)
             avg_distance = np.round(df1['Distance'].mean(),2)
-            col5.metric('Distancia media das entregas', avg_distance)
+            col4.metric('Distancia media das entregas', avg_distance)
             
+        with col5: 
+            df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
+                         .groupby('Festival')
+                         .agg({'Time_taken(min)' : ['mean','std']}))
+            
+            df_aux.columns = ['avg_time','std_time']
+            df_aux = df_aux.reset_index()
+            df_aux = np.round(df_aux.loc[df_aux['Festival']=='Yes','std_time'],2 )
+            col5.metric('Desvio Padrão de Entrega sem Festival', df_aux)
+                                    
         with col6:
             df_aux= (df1.loc[:,['Time_taken(min)','Festival']]
                          .groupby('Festival')
